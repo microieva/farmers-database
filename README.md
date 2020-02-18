@@ -4,6 +4,5 @@
 
 ## [DEMO](https://microieva.github.io/farmers-database/)
 
-![](scr.pdf)
 
 
