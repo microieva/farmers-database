@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class ConnectedFarmerDetails extends Component {
-
     render () {
-        //console.log("FarmerDetails this.props", this.props);
-
         if (!this.props.farmer) {
             return (<h4>Select Farmer...</h4>);
         }
