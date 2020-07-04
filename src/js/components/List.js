@@ -5,7 +5,10 @@ import { selectFarmer } from "../actions/actions";
 
 const ConnectedList = ({ farmers, searchWord, selectFarmer }) => (
   
-    <div>
+    <div className='container'>
+      <div className='card-title'>
+          <h4>Members List</h4>
+      </div>
       <ul>
         {farmers
           .filter(farmer => 

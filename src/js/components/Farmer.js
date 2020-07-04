@@ -4,13 +4,26 @@ import { connect } from "react-redux";
 class ConnectedFarmerDetails extends Component {
     render () {
         if (!this.props.farmer) {
-            return (<h4>Select Farmer...</h4>);
+            return (
+              <div className='container'>
+                <div className='card-title'>
+                  <h4>Select A Member...</h4>
+                </div>
+              </div>);
         }
         return (
-            <div className="">
-                <h4>Name: {this.props.farmer.name}</h4>
-                <h4>Phone Number: {this.props.farmer.phoneNumber}</h4>
-                <h4>Gender: {this.props.farmer.gender}</h4>
+            <div className='container'>
+              <div className='card-title'>
+                <h4>Member Details</h4>
+              </div>
+              <div className='member-details'>
+                <h4>Name: </h4>
+                <p>{this.props.farmer.name}</p>
+                <h4>Phone Number:</h4>
+                <p>{this.props.farmer.phoneNumber}</p>
+                <h4>Gender:</h4>
+                <p>{this.props.farmer.gender}</p>
+              </div>
             </div>
         );
 
@@ -20,7 +33,6 @@ class ConnectedFarmerDetails extends Component {
 const mapStateToProps = state => {
   return { farmer: state.selectedFarmer };
 };
-
 
 const Farmer = connect(mapStateToProps, null)(ConnectedFarmerDetails);
 

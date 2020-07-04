@@ -24,19 +24,22 @@ class SearchBar extends Component {
 
     render() {
         return (
+          <div className='container'>
+            <div className='card-title'>
+              <h4>Search Members</h4>
+            </div>
             <form>
                 <div>
                     <input type="text"
-                        className="form-control"
+                        className="inputs"
                         placeholder="Search Name..."      
                         onChange={e => this.props.searchFarmers(e.target.value)} />
-                    <div>
-                        <button
-                            onClick={this.onClickHandler}>Back to List
-                        </button>
-                    </div>
                 </div>
+                <button
+                  onClick={this.onClickHandler}>Full List
+                </button>    
             </form>
+          </div>
         )
     }
 }
