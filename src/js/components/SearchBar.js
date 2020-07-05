@@ -12,13 +12,13 @@ class SearchBar extends Component {
             searchWord: ""
         };
 
-        this.onClickHandler = this.onClickHandler.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
-    onClickHandler(e){
+    onClick(e){
         e.preventDefault();
         this.props.searchFarmers(this.state.searchWord);
-        this.setState(()=>({searchWord:""}));
+        this.setState({searchWord:""});
         
     }
 
@@ -32,11 +32,11 @@ class SearchBar extends Component {
                 <div>
                     <input type="text"
                         className="inputs"
-                        placeholder="Search Name..."      
+                        placeholder="Search By Name..."      
                         onChange={e => this.props.searchFarmers(e.target.value)} />
                 </div>
                 <button
-                  onClick={this.onClickHandler}>Full List
+                  onClick={this.onClick}>Full List
                 </button>    
             </form>
           </div>

@@ -1,10 +1,19 @@
+
 .wrapper {
+  display: flex;
+  max-width: 1200px;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid {
   font-family: Arial, Helvetica, sans-serif;
   display:grid;
   grid-template-columns: 50% 50%;
+  min-width: 100%;
 }
 
-.wrapper > div {
+.grid > div {
   margin: 1rem;
 }
 
@@ -15,6 +24,8 @@
 }
 
 .card-title {
+  display: flex;
+  justify-content: space-between;
   color: darkgray;
   width: 100%;
   border-bottom: 2px solid darkgray;
@@ -30,6 +41,7 @@ form>div {
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
+  table-layout: fixed;
 }
 
 label {
@@ -62,10 +74,30 @@ button {
   border: none;
 }
 
-.btn {
-  background: darkgreen;
+.btn:disabled {
+  cursor: default;
 }
 
+ul {
+  margin: 2rem 0;
+}
+
+li {
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+/* EXAMPLE  .grid_item {
+  @include rowMachine(1, 10%);
+  display: inline-block;
+  background: none;
+  padding: 10px;
+  position: relative;
+
+  @media (min-width: 500px) {
+      @include rowMachine(2, 5%);
+      float: left;
+  } */
 
 /* // body {
 //     line-height: 2;

@@ -8,10 +8,12 @@ import SearchBar from "./SearchBar";
 const App = () => {
   return (
     <div className="wrapper">
-      <Form />
-      <List/>
-      <SearchBar/>
-      <Farmer/>
+      <div className="grid">
+        <Form />
+        <List/>
+        <SearchBar/>
+        <Farmer/>
+      </div>
     </div>
   )  
 };

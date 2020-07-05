@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux';
 import { selectFarmer } from "../actions/actions";
 
 const ConnectedList = ({ farmers, searchWord, selectFarmer}) => {
-  // `${description.charAt(0).toUpperCase()} + ${description.slice(1)}`
   return (
     <div className='container'>
       <div className='card-title'>
           <h4>Members List</h4>
+          {farmers.length>0 && <h4>Number of Members: {farmers.length}</h4>}
       </div>
       <ul>
         {farmers

@@ -26,17 +26,12 @@ class ConnectedForm extends Component {
       lastName: "",
       phoneNumber: "",
     }
-    const button = document.getElementsByClassName('btn')
     
-
     if (this.state.firstName !== "" &&
       !validator.isLength(this.state.firstName, { min: 3, max: 15 })
     ) {
       errors.firstName = 'First name must be longer than 3 characters.'
-      button.disabled = true
-    } else {
-      button.disabled = false
-    }
+    } 
 
     if (this.state.lastName !=="" &&
       !validator.isLength(this.state.lastName, { min: 3, max: 15 })
@@ -45,7 +40,7 @@ class ConnectedForm extends Component {
     } 
 
     if (this.state.phoneNumber !=="" &&
-      !validator.isLength(this.state.phoneNumber, { min: 7, max: 12 })
+      !validator.isLength(this.state.phoneNumber, { min: 7, max: 15 })
     ) {
       errors.phoneNumber = 'Phone number should be more than 6 characters.'
     }
@@ -53,18 +48,19 @@ class ConnectedForm extends Component {
     return errors
   }
 
-
   handleChange(event) {
     const { value, type, id } = event.target
-      if (type === 'radio') {
+
+    if (type === 'radio') {
         this.setState({
           gender: value
         })
-      } else {
+    } else {
         this.setState({
-            [id]: value
+          [id]: value,
         });
       }
+        
   }
 
   handleSubmit(event) {
@@ -75,22 +71,20 @@ class ConnectedForm extends Component {
 
       this.props.addFarmer({ firstName, lastName, phoneNumber, gender, id });
       button.textContent= "Saved!"
-      this.setState({ 
-          firstName: "" ,
-          lastName: "",
-          phoneNumber: "",
-          gender: ""
-      });
-      setInterval(() => {    
-        button.textContent="Save"
-      }, 2000)
-    
-  }
+        this.setState({ 
+            firstName: "" ,
+            lastName: "",
+            phoneNumber: "",
+            gender: ""
+        });
+        setInterval(() => {    
+          button.textContent="Save"
+        }, 2000)
+  }   
 
   render() {
       const { firstName, lastName, phoneNumber, gender } = this.state;
       const errors = this.validate()
-      //const button = document.querySelector('.btn')
       
       return (
         <div className="container">
@@ -157,7 +151,10 @@ class ConnectedForm extends Component {
                     />Male
                   </div>
                 </div>
-              <button type="submit" className="btn">
+              <button 
+                type="submit" 
+                className="btn" 
+                disabled={(firstName.length>=3 && lastName.length>=3 && phoneNumber.length>6)? false : true}>
                 Save
               </button>
           </form>
