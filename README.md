@@ -1,8 +1,21 @@
-### FARMERS DATABASE
 
-**A single-page application built on React with Redux, with a functionality to add search and open an entry card from a list.**
+# Membership Database
 
-## [DEMO](https://microieva.github.io/farmers-database/)
+A portfolio project built with React with Redux
+
+## Description
+
+Fill in a membership form. See and search the name list. Choose a name from the list, view more details.
+
+## See Demo
+
+[DEMO](https://farmers-database.herokuapp.com/)
+
+
+## Authors
+
+ Ieva Vyliaudaite 
+ [LinkedIn](https://www.linkedin.com/in/ievavyliaudaite/)
 
 
 
