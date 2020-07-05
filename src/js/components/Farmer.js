@@ -18,7 +18,7 @@ class ConnectedFarmerDetails extends Component {
               </div>
               <div className='member-details'>
                 <h4>Name: </h4>
-                <p>{this.props.farmer.name}</p>
+                <p>{`${this.props.farmer.firstName.charAt(0).toUpperCase()}${this.props.farmer.firstName.slice(1)} ${this.props.farmer.lastName.charAt(0).toUpperCase()}${this.props.farmer.lastName.slice(1)}`}</p>
                 <h4>Phone Number:</h4>
                 <p>{this.props.farmer.phoneNumber}</p>
                 <h4>Gender:</h4>

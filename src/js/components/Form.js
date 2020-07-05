@@ -5,13 +5,14 @@ import validator from 'validator'
 
 import { addFarmer } from "../actions/actions";
 
-const Feedback = props => <p style={{ color: 'red' }}>{props.error}</p>
+const Feedback = props => <p style={{ color: 'orange', fontSize: '0.8rem' }}>{props.error}</p>
 
 class ConnectedForm extends Component {
     constructor() {
         super();
         this.state = {
-            name: "",
+            firstName: "",
+            lastName: "",
             phoneNumber: "",
             gender: "",
     };
@@ -21,18 +22,32 @@ class ConnectedForm extends Component {
 
   validate () {
     const errors = {
-      name: '',
-      phoneNumber: ''
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
     }
-    if (
-      !validator.isLength(this.state.name, { min: 3, max: 15 })
+    const button = document.getElementsByClassName('btn')
+    
+
+    if (this.state.firstName !== "" &&
+      !validator.isLength(this.state.firstName, { min: 3, max: 15 })
     ) {
-      errors.name = 'Name must be between 2 and 15 characters'
+      errors.firstName = 'First name must be longer than 3 characters.'
+      button.disabled = true
+    } else {
+      button.disabled = false
     }
-    if (
+
+    if (this.state.lastName !=="" &&
+      !validator.isLength(this.state.lastName, { min: 3, max: 15 })
+    ) {
+      errors.lastName = 'Last name must be between 3 and 15 characters.'
+    } 
+
+    if (this.state.phoneNumber !=="" &&
       !validator.isLength(this.state.phoneNumber, { min: 7, max: 12 })
     ) {
-      errors.phoneNumber = 'Phone number should be more than 6 characters'
+      errors.phoneNumber = 'Phone number should be more than 6 characters.'
     }
 
     return errors
@@ -40,42 +55,43 @@ class ConnectedForm extends Component {
 
 
   handleChange(event) {
-    const { name, value, type, checked, id } = event.target
+    const { value, type, id } = event.target
       if (type === 'radio') {
         this.setState({
-          [name]: checked
+          gender: value
         })
       } else {
         this.setState({
             [id]: value
         });
       }
-      const button = document.querySelector('.btn')
-      button.style.background = "darkgreen"
-      button.textContent = "Save"
   }
 
   handleSubmit(event) {
       event.preventDefault();
-      const { name, phoneNumber, gender } = this.state;
+      const { firstName, lastName, phoneNumber, gender } = this.state;
       const id = uuidv1();
-      this.props.addFarmer({ name, phoneNumber, gender, id });
       const button = document.querySelector('.btn')
+
+      this.props.addFarmer({ firstName, lastName, phoneNumber, gender, id });
       button.textContent= "Saved!"
       this.setState({ 
-          name: "" , 
+          firstName: "" ,
+          lastName: "",
           phoneNumber: "",
           gender: ""
       });
       setInterval(() => {    
         button.textContent="Save"
-        button.style.background ="orange"
       }, 2000)
+    
   }
 
   render() {
-      const { name, phoneNumber, gender } = this.state;
+      const { firstName, lastName, phoneNumber, gender } = this.state;
       const errors = this.validate()
+      //const button = document.querySelector('.btn')
+      
       return (
         <div className="container">
           <div className='card-title'>
@@ -84,16 +100,28 @@ class ConnectedForm extends Component {
           
           <form onSubmit={this.handleSubmit}>
                 <div>
-                  <label htmlFor="name">Name:</label>
+                  <label htmlFor="firstName">First Name:</label>
                   <input
                     className='inputs'
-                    placeholder="Add Name..."
+                    placeholder="Add Your Given Name..."
                     type="text"
-                    id="name"
-                    value={name}
+                    id="firstName"
+                    value={firstName}
                     onChange={this.handleChange}
                   />
-                  {errors.name ? <Feedback error={errors.name} /> : ''}
+                  {errors.firstName ? <Feedback error={errors.firstName} /> : ''}
+                </div>
+                <div>
+                  <label htmlFor="lastName">Last Name:</label>
+                  <input
+                    className='inputs'
+                    placeholder="Add Your Family Name..."
+                    type="text"
+                    id="lastName"
+                    value={lastName}
+                    onChange={this.handleChange}
+                  />
+                  {errors.lastName ? <Feedback error={errors.lastName} /> : ''}
                 </div>
                 <div>
                   <label htmlFor="phoneNumber">Phone Number:</label>
@@ -115,7 +143,7 @@ class ConnectedForm extends Component {
                       type="radio"
                       name = "gender"
                       value="Female"     
-                      checked={gender === 'Female'}
+                      checked= {gender === 'Female'}
                       onChange={this.handleChange} 
                     />Female
                     <br />
@@ -124,12 +152,12 @@ class ConnectedForm extends Component {
                       type="radio"
                       name="gender"
                       value="Male"
-                      checked={gender === 'Male'}
+                      checked= {gender === 'Male'}
                       onChange={this.handleChange} 
                     />Male
                   </div>
                 </div>
-              <button type="submit" className='btn'>
+              <button type="submit" className="btn">
                 Save
               </button>
           </form>
@@ -143,7 +171,6 @@ const mapDispatchToProps = dispatch => {
         addFarmer: farmer => dispatch(addFarmer(farmer))
     };
 };
-
 
 const Form = connect(null, mapDispatchToProps)(ConnectedForm);
 
