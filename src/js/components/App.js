@@ -8,6 +8,11 @@ import SearchBar from "./SearchBar";
 const App = () => {
   return (
     <div className="wrapper">
+      <div className="header">
+        <div>
+          <h2>Member Database</h2>
+        </div>
+      </div>
       <div className="flex-top">
         <Form />
         <List/>
