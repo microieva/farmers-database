@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-import { selectFarmer } from "../actions/actions";
+//import { bindActionCreators } from 'redux';
 
-const ConnectedList = ({ farmers, searchWord, selectFarmer}) => {
+const List = ({ farmers, searchWord, getFarmer }) => {
   return (
     <div className='container'>
       <div className='card-title'>
@@ -19,7 +18,7 @@ const ConnectedList = ({ farmers, searchWord, selectFarmer}) => {
           )
           .map(farmer => (
             <li key={farmer.id}
-              onClick={()=> selectFarmer(farmer)}>
+              onClick={()=> getFarmer(farmer)}>
               {`${farmer.firstName.charAt(0).toUpperCase()}${farmer.firstName.slice(1)} ${farmer.lastName.charAt(0).toUpperCase()}${farmer.lastName.slice(1)}`}
             </li>
         ))}
@@ -29,14 +28,14 @@ const ConnectedList = ({ farmers, searchWord, selectFarmer}) => {
 };
 
 
-const matchDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { 
-      selectFarmer: selectFarmer 
-    }, 
-    dispatch
-  )
-};
+// const matchDispatchToProps = dispatch => {
+//   return bindActionCreators(
+//     { 
+//       getFarmer: this.props.getFarmer,
+//     }, 
+//     dispatch
+//   )
+// };
 
 const mapStateToProps = state => {
   return { 
@@ -45,6 +44,5 @@ const mapStateToProps = state => {
   }
 };
 
-const List = connect(mapStateToProps, matchDispatchToProps)(ConnectedList);
+export default connect(mapStateToProps, null)(List);
 
-export default List;

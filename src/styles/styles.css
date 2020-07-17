@@ -73,6 +73,11 @@ label {
   text-indent: 1rem;
 }
 
+.error {
+  color: orange;
+  font-size: 0.8rem;
+}
+
 .member-details {
   padding: 1rem;
 }
