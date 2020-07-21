@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import uuidv1 from "uuid";
 import validator from 'validator'
 
-import { addFarmer } from "../actions/actions";
+import { addMember } from "../actions/actions";
 
 const Feedback = props => <p style={{ color: 'orange', fontSize: '0.8rem' }}>{props.error}</p>
 
@@ -69,7 +69,7 @@ class ConnectedForm extends Component {
       const id = uuidv1();
       const button = document.querySelector('.btn')
 
-      this.props.addFarmer({ firstName, lastName, phoneNumber, gender, id });
+      this.props.addMember({ firstName, lastName, phoneNumber, gender, id });
       button.textContent= "Saved!"
         this.setState({ 
             firstName: "" ,
@@ -165,7 +165,7 @@ class ConnectedForm extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addFarmer: farmer => dispatch(addFarmer(farmer))
+        addMember: member => dispatch(addMember(member))
     };
 };
 

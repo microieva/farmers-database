@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { searchFarmers } from "../actions/actions";
-//import PropTypes from "prop-types";
+import { searchMembers } from "../actions/actions";
 
 
 class SearchBar extends Component {
@@ -17,7 +16,7 @@ class SearchBar extends Component {
 
     onClick(e){
         e.preventDefault();
-        this.props.searchFarmers(this.state.searchWord);
+        this.props.searchMembers(this.state.searchWord);
         this.setState({searchWord:""});
         
     }
@@ -33,7 +32,7 @@ class SearchBar extends Component {
                     <input type="text"
                         className="inputs"
                         placeholder="Search By Name..."      
-                        onChange={e => this.props.searchFarmers(e.target.value)} />
+                        onChange={e => this.props.searchMembers(e.target.value)} />
                 </div>
                 <button
                   onClick={this.onClick}>Full List
@@ -49,7 +48,7 @@ const mapStateToProps= state => {
 }
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({searchFarmers: searchFarmers}, dispatch);
+    return bindActionCreators({searchMembers: searchMembers}, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

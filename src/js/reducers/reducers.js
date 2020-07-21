@@ -1,33 +1,25 @@
-import { ADD_FARMER } from "../constants/action-types";
-import { SELECT_FARMER } from "../constants/action-types";
-import { SEARCH_FARMERS } from "../constants/action-types";
-
-
-/*const reducers = combineReducers({
-    farmers: addFarmer,
-    activeFarmer: selectFarmer,
-    searchFarmers: searchFarmers
-});
-
-export default reducers;*/
-
+import { 
+  ADD_MEMBER,
+  SELECT_MEMBER,
+  SEARCH_MEMBERS 
+} from "../constants/action-types";
 
 const initialState = {
-    farmers: [],
+    members: [],
     searchWord: '',
-    selectedFarmer: null,
-    filteredFarmers: []
+    selectedMember: null,
+    filteredMembers: []
 };
 
 const reducers = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_FARMER:
-            return { ...state, farmers: [...state.farmers, action.payload] };
+        case ADD_MEMBER:
+            return { ...state, members: [...state.members, action.payload] };
 
-        case SELECT_FARMER: 
-            return { ...state, selectedFarmer: action.payload };
+        case SELECT_MEMBER: 
+            return { ...state, selectedMember: action.payload };
         
-        case SEARCH_FARMERS: 
+        case SEARCH_MEMBERS: 
             return {...state, searchWord: action.payload };
         
         default:

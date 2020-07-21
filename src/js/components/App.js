@@ -1,7 +1,7 @@
 import React from "react";
 import List from "./List";
 import Form from "./Form";
-import Farmer from "./Farmer";
+import Member from "./Member";
 import SearchBar from "./SearchBar";
 
 
@@ -10,16 +10,16 @@ const App = () => {
     <div className="wrapper">
       <div className="header">
         <div>
-          <h2>Member Database</h2>
+          <h2>Members Database</h2>
         </div>
       </div>
       <div className="flex-top">
-        <Form />
+        <Form/>
         <List/>
       </div>
       <div className="flex-bottom">
         <SearchBar/>
-        <Farmer/>
+        <Member/>
       </div>
     </div>
   )  

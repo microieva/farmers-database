@@ -1,24 +1,26 @@
-import { ADD_FARMER } from "../constants/action-types";
-import { SELECT_FARMER } from "../constants/action-types";
-import { SEARCH_FARMERS } from "../constants/action-types";
+import { 
+  ADD_MEMBER,
+  SELECT_MEMBER,
+  SEARCH_MEMBERS 
+} from "../constants/action-types";
 
-export const addFarmer = (farmer) => { 
+export const addMember = (member) => { 
     return {
-        type: ADD_FARMER, 
-        payload: farmer 
+        type: ADD_MEMBER, 
+        payload: member 
     }
 };
 
-export const selectFarmer = (farmer) => {
+export const selectMember = (member) => {
     return {
-        type: SELECT_FARMER,
-        payload: farmer
+        type: SELECT_MEMBER,
+        payload: member
     }
 };
 
-export const searchFarmers = (searchWord ="") => {
+export const searchMembers = (searchWord ="") => {
     return {
-        type: SEARCH_FARMERS,
+        type: SEARCH_MEMBERS,
         payload: searchWord
     }
 }

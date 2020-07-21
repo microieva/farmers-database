@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class ConnectedFarmerDetails extends Component {
+class ConnectedMemberDetails extends Component {
     render () {
-        if (!this.props.farmer) {
+        if (!this.props.member) {
             return (
               <div className='container'>
                 <div className='card-title'>
@@ -18,11 +18,11 @@ class ConnectedFarmerDetails extends Component {
               </div>
               <div className='member-details'>
                 <h4>Name: </h4>
-                <p>{`${this.props.farmer.firstName.charAt(0).toUpperCase()}${this.props.farmer.firstName.slice(1)} ${this.props.farmer.lastName.charAt(0).toUpperCase()}${this.props.farmer.lastName.slice(1)}`}</p>
+                <p>{`${this.props.member.firstName.charAt(0).toUpperCase()}${this.props.member.firstName.slice(1)} ${this.props.member.lastName.charAt(0).toUpperCase()}${this.props.member.lastName.slice(1)}`}</p>
                 <h4>Phone Number:</h4>
-                <p>{this.props.farmer.phoneNumber}</p>
+                <p>{this.props.member.phoneNumber}</p>
                 <h4>Gender:</h4>
-                <p>{this.props.farmer.gender}</p>
+                <p>{this.props.member.gender}</p>
               </div>
             </div>
         );
@@ -31,9 +31,9 @@ class ConnectedFarmerDetails extends Component {
 }
 
 const mapStateToProps = state => {
-  return { farmer: state.selectedFarmer };
+  return { member: state.selectedMember };
 };
 
-const Farmer = connect(mapStateToProps, null)(ConnectedFarmerDetails);
+const Member = connect(mapStateToProps, null)(ConnectedMemberDetails);
 
-export default Farmer;
+export default Member;
