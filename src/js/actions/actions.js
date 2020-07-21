@@ -1,28 +1,28 @@
 import { 
-  ADD_FARMER,
-  GET_FARMER,
-  SEARCH_FARMERS,
+  ADD_MEMBER,
+  GET_MEMBER,
+  SEARCH_MEMBERS,
   UPDATE_INPUT
  } from "../constants/action-types";
 
 
-export const addFarmer = (farmer) => { 
+export const addMember = (member) => { 
     return {
-        type: ADD_FARMER, 
-        payload: farmer
+        type: ADD_MEMBER, 
+        payload: member
     }
 };
 
-export const getFarmer = (farmer) => {
+export const getMember = (member) => {
     return {
-        type: GET_FARMER,
-        payload: farmer
+        type: GET_MEMBER,
+        payload: member
     }
 };
 
-export const searchFarmers = (searchWord ="") => {
+export const searchMembers = (searchWord ="") => {
     return {
-        type: SEARCH_FARMERS,
+        type: SEARCH_MEMBERS,
         payload: searchWord
     }
 }

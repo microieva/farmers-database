@@ -2,28 +2,21 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getFarmer, addFarmer, updateInput } from '../actions/actions';
-//import List from "./List";
-import FarmerForm from "./Form";
-import Farmer from "./Farmer";
+import { getMember, addMember } from '../actions/actions';
+import List from "./List";
+import MemberForm from "./Form";
+import Member from "./Member";
 import SearchBar from "./SearchBar";
 
 
 class App extends Component {
   render() {
     const { 
-      // input: {
-      //   firstName,
-      //   lastName,
-      //   phoneNumber,
-      // },
-      //gender,
-      input,
-      selectedFarmer, 
-      //farmers, 
+      selectedMember, 
+      members, 
       searchWord,
-      //getFarmer,
-      addFarmer,
+      getMember,
+      addMember,
     } = this.props
 
     //console.log("props from App.js", this.props)
@@ -36,23 +29,18 @@ class App extends Component {
           </div>
         </div>
         <div className="flex-top">
-          <FarmerForm 
-            // firstName={firstName}
-            // lastName={lastName}
-            // phoneNumber={phoneNumber}
-            // gender={gender}
-            input={input}
-            addFarmer={addFarmer}
+          <MemberForm 
+            addMember={addMember}
           />
-          {/* <List 
-            //farmers={farmers} 
+          <List 
+            members={members} 
             searchWord={searchWord} 
-            getFarmer={getFarmer}
-          /> */}
+            getMember={getMember}
+          /> 
         </div>
         <div className="flex-bottom">
           <SearchBar searchWord={searchWord}/>
-          {!selectedFarmer
+          {!selectedMember
           ?
           <div className='container'>
             <div className='card-title'>
@@ -60,7 +48,7 @@ class App extends Component {
             </div>
           </div>
           :
-          <Farmer selectedFarmer={selectedFarmer}/>
+          <Member selectedMember={selectedMember}/>
           }
           
         </div>
@@ -73,27 +61,20 @@ const mapStateToProps = state => {
   //console.log('state from mapStateToProps', state)
 
   return {
-      input: state.input,
-      // firstName: state.input.firstName,
-      // lastName: state.input.lastName,
-      // phoneNumber: state.input.phoneNumber,
-      //gender: state.gender,
-      farmers: state.farmers,
+      members: state.members,
       searchWord: state.searchWord,
-      selectedFarmer: state.selectedFarmer,
+      selectedMember: state.selectedMember,
   }
 }
 
 const matchDispatchToProps = dispatch => {
   return bindActionCreators(
     { 
-      getFarmer: getFarmer,
-      addFarmer: addFarmer,
-      updateInput: updateInput
+      getMember: getMember,
+      addMember: addMember
     }, 
     dispatch
   )
 };
 
-// get Farmer ---> action destructured inside matchDispatchToProps
 export default connect(mapStateToProps, matchDispatchToProps)(App)

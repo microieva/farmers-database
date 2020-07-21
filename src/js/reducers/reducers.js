@@ -1,39 +1,39 @@
 import { reducer as formReducer } from 'redux-form'
 import { combineReducers } from 'redux'
 import { 
-  ADD_FARMER,
-  GET_FARMER,
-  SEARCH_FARMERS,
+  ADD_MEMBER,
+  GET_MEMBER,
+  SEARCH_MEMBERS,
   UPDATE_INPUT
 } from "../constants/action-types";
 
 
 /*const reducers = combineReducers({
-    farmers: addFarmer,
-    activeFarmer: selectFarmer,
-    searchFarmers: searchFarmers
+    members: addmember,
+    activemember: selectmember,
+    searchmembers: searchmembers
 });
 
 export default reducers;*/
 
 
 const initialState = {
-    farmers: [],
+    members: [],
     searchWord: '',
-    selectedFarmer: null,
-    filteredFarmers: [],
+    selectedMember: null,
+    filteredMembers: [],
     input: {}
 };
 
 const reducers = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_FARMER:
-            return { ...state, farmers: [...state.farmers, action.payload] };
+        case ADD_MEMBER:
+            return { ...state, members: [...state.members, action.payload] };
 
-        case GET_FARMER: 
-            return { ...state, selectedFarmer: action.payload };
+        case GET_MEMBER: 
+            return { ...state, selectedMember: action.payload };
         
-        case SEARCH_FARMERS: 
+        case SEARCH_MEMBERS: 
             return {...state, searchWord: action.payload };
         
         case UPDATE_INPUT:

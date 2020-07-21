@@ -1,4 +1,4 @@
-export const ADD_FARMER = "ADD_FARMER";
-export const GET_FARMER = "GET_FARMER";
-export const SEARCH_FARMERS = "SEARCH_FARMERS";
+export const ADD_MEMBER = "ADD_MEMBER";
+export const GET_MEMBER = "GET_MEMBER";
+export const SEARCH_MEMBERS = "SEARCH_MEMBERS";
 export const UPDATE_INPUT = "UPDATE_INPUT"

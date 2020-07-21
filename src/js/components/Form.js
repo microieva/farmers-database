@@ -1,27 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Field, reduxForm, SubmissionError } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 //import uuidv1 from "uuid";
-
-//import { addFarmer } from "../actions/actions";
-
-async function submitting(data) {
-  try {
-    let response = await fetch("http://localhost:3000/farmers-database", {
-      method: 'POST',
-      headers: {
-        'Content-Type':'application/json',
-        'Accept':'application/json'
-      },
-      responseType: 'json',
-      body: JSON.stringify(data)
-    });
-    let responseJson = await response.json()
-    return responseJson
-  } catch (error) {
-    console.log("error in submitting:", error)
-  }
-}
 
 const renderField = (
   {
@@ -60,82 +40,48 @@ const renderField = (
         
   // }
 
-const  submit = ({firstName="", lastName="", phoneNumber="" }) =>{
+const  addMember = ({firstName="", lastName="", phoneNumber="" }) =>{
   let error ={};
-  let isError = false; 
+  //let isError = false; 
   //const button = document.querySelector('.btn')
 
   if (firstName.trim()==="" || firstName.length < 3 || firstName.length > 13) {
     error.firstName = "Required field. From 2 to 12 letters long."
-    isError = true
+    //isError = true
   }
 
   else if (lastName.trim()==="" || lastName.length < 3 || lastName.length > 16) {
     error.lastName = "Required field. From 2 to 15 letters long."
-    isError = true
+    //isError = true
   }
 
   else if (phoneNumber.trim()==="" || phoneNumber.length < 6 ) {
     error.phoneNumber = "Required field. No less than 6 characters long."
-    isError = true
+    //isError = true
   }
 
-  if (isError) {
-    throw new SubmissionError(error)
-  } else {
+  else {
     //submit form
-    return submitting({firstName, lastName, phoneNumber})
-      .then(data => {
-        if (data.errors) {
-          throw new SubmissionError({
-            firstName: data.errors.firstName,
-            lastName: data.errors.lastName,
-            phoneNumber: data.errors.phoneNumber
-          })
-        } else {
-          console.log("server added data", data)
-        }
-      })
+    //to localSt
+    this.props.addMember({firstName, lastName, phoneNumber})
+      
 
     // button.textContent = "Saved!"
     // setInterval(() => {    
     //   button.textContent="Save"
     // }, 2000)
-  }
-      //event.preventDefault();
-      //const { firstName, lastName, phoneNumber, gender } = values
-      // const { firstName, lastName, phoneNumber, gender } = this.state;
-      //const id = uuidv1();
-      // 
+  }     
+    console.log("VALUES: ", firstName, lastName, phoneNumber)
+}   
 
-      // this.props.addFarmer(
-      //   { 
-      //     firstName: firstName, 
-      //     lastName: lastName, 
-      //     phoneNumber: phoneNumber, 
-      //     //gender: gender, 
-      //   }
-      // );
-      // button.textContent= "Saved!"
-      //   this.setState({ 
-      //       firstName: "" ,
-      //       lastName: "",
-      //       phoneNumber: "",
-      //       gender: ""
-      //   });
-      //   
-      //console.log("VALUES: ", firstName, lastName, phoneNumber)
-  }   
-
-const FarmerForm = ({handleSubmit}) => {
-      //const errors = validate()
+const MemberForm = ({handleSubmit, addMember}) => {
       
       return (
         <div className="container">
           <div className='card-title'>
             <h4>Membership Form</h4>
           </div>
-            <form onSubmit={handleSubmit(submit)}>
+            <form onSubmit={handleSubmit(addMember)}>
                   
                     <Field
                       label=" First Name:"
@@ -183,16 +129,7 @@ const FarmerForm = ({handleSubmit}) => {
                 <button 
                   type="submit" 
                   className="btn" 
-                  // disabled={
-                  //   (
-                  //     (firstName && firstName.length>=3)
-                  //     && 
-                  //     (lastName && lastName.length>=3)
-                  //     && 
-                  //     (phoneNumber && phoneNumber.length>6)
-                  //   )
-                  //   ? false : true}
-                  >
+                >
                   Save
                 </button>
             </form>
@@ -212,15 +149,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addFarmer: farmer => dispatch(this.props.addFarmer(farmer)),
-    //updateInput: input => dispatch(this.props.updateInput(input))
+    addMember: member => dispatch(this.props.addMember(member)),
   };
 };
 
 const Form = reduxForm({
-  form: 'details-form',
+  form: 'member-form',
   onSubmit: submit
-})(FarmerForm)
+})(MemberForm)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
