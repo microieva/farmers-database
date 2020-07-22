@@ -1,174 +1,134 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import uuidv1 from "uuid";
-import validator from 'validator'
+import React from "react";
+import { Field, reduxForm } from 'redux-form'
+//import uuidv1 from "uuid";
 
-import { addMember } from "../actions/actions";
+const renderField = (
+  {
+    label, 
+    input, 
+    placeholder, 
+    type,
+    className,
+    meta: {touched, error}
+  }
+) => (
+  <div>
+    <label>{label}</label>
+    <input {...input} 
+      className={className}
+      type={type}
+      placeholder={placeholder}
+    />
+    {touched && error && <span className="error">{error}</span>}
+  </div>
+)
 
-const Feedback = props => <p style={{ color: 'orange', fontSize: '0.8rem' }}>{props.error}</p>
+const  validate = ({firstName="", lastName="", phoneNumber="", gender="" }) =>{
+  let error ={}; 
+  //const button = document.querySelector('.btn')
 
-class ConnectedForm extends Component {
-    constructor() {
-        super();
-        this.state = {
-            firstName: "",
-            lastName: "",
-            phoneNumber: "",
-            gender: "",
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  if (firstName.trim()==="" || firstName.length < 3 || firstName.length > 13) {
+    error.firstName = "Required field. From 2 to 12 letters long."
   }
 
-  validate () {
-    const errors = {
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
-    }
-    
-    if (this.state.firstName !== "" &&
-      !validator.isLength(this.state.firstName, { min: 3, max: 15 })
-    ) {
-      errors.firstName = 'First name must be longer than 3 characters.'
-    } 
-
-    if (this.state.lastName !=="" &&
-      !validator.isLength(this.state.lastName, { min: 3, max: 15 })
-    ) {
-      errors.lastName = 'Last name must be between 3 and 15 characters.'
-    } 
-
-    if (this.state.phoneNumber !=="" &&
-      !validator.isLength(this.state.phoneNumber, { min: 7, max: 15 })
-    ) {
-      errors.phoneNumber = 'Phone number should be more than 6 characters.'
-    }
-
-    return errors
+  else if (lastName.trim()==="" || lastName.length < 3 || lastName.length > 16) {
+    error.lastName = "Required field. From 2 to 15 letters long."
   }
 
-  handleChange(event) {
-    const { value, type, id } = event.target
-
-    if (type === 'radio') {
-        this.setState({
-          gender: value
-        })
-    } else {
-        this.setState({
-          [id]: value,
-        });
-      }
-        
+  else if (phoneNumber.trim()==="" || phoneNumber.length < 6 ) {
+    error.phoneNumber = "Required field. No less than 6 characters long."
   }
 
-  handleSubmit(event) {
-      event.preventDefault();
-      const { firstName, lastName, phoneNumber, gender } = this.state;
-      const id = uuidv1();
-      const button = document.querySelector('.btn')
+  else {
+    //submit form
+    //to localSt
+    this.props.addMember({firstName, lastName, phoneNumber, gender})
+      
 
-      this.props.addMember({ firstName, lastName, phoneNumber, gender, id });
-      button.textContent= "Saved!"
-        this.setState({ 
-            firstName: "" ,
-            lastName: "",
-            phoneNumber: "",
-            gender: ""
-        });
-        setInterval(() => {    
-          button.textContent="Save"
-        }, 2000)
-  }   
+    // button.textContent = "Saved!"
+    // setInterval(() => {    
+    //   button.textContent="Save"
+    // }, 2000)
+  }     
+    console.log("VALUES: ", firstName, lastName, phoneNumber)
+}   
 
-  render() {
-      const { firstName, lastName, phoneNumber, gender } = this.state;
-      const errors = this.validate()
+const MemberForm = (
+  {
+    handleSubmit, 
+    fields: {firstName, lastName, phoneNumber, gender}, 
+    addMember
+  }
+) => {
       
       return (
         <div className="container">
           <div className='card-title'>
             <h4>Membership Form</h4>
           </div>
-          
-          <form onSubmit={this.handleSubmit}>
-                <div>
-                  <label htmlFor="firstName">First Name:</label>
-                  <input
-                    className='inputs'
-                    placeholder="Add Your Given Name..."
-                    type="text"
-                    id="firstName"
-                    value={firstName}
-                    onChange={this.handleChange}
-                  />
-                  {errors.firstName ? <Feedback error={errors.firstName} /> : ''}
-                </div>
-                <div>
-                  <label htmlFor="lastName">Last Name:</label>
-                  <input
-                    className='inputs'
-                    placeholder="Add Your Family Name..."
-                    type="text"
-                    id="lastName"
-                    value={lastName}
-                    onChange={this.handleChange}
-                  />
-                  {errors.lastName ? <Feedback error={errors.lastName} /> : ''}
-                </div>
-                <div>
-                  <label htmlFor="phoneNumber">Phone Number:</label>
-                  <input
-                    className='inputs'
-                    placeholder="Add Phone Number..."
-                    type="text"
-                    id="phoneNumber"
-                    value={phoneNumber}
-                    onChange={this.handleChange} 
-                  />
-                  {errors.phoneNumber ? <Feedback error={errors.phoneNumber} /> : ''}
-                </div>
-                <div>
-                  <label htmlFor="gender">Gender: </label>
-                  <div>
-                    <input 
-                      className="checkbox"
-                      type="radio"
-                      name = "gender"
-                      value="Female"     
-                      checked= {gender === 'Female'}
-                      onChange={this.handleChange} 
+            <form onSubmit={handleSubmit(addMember)}>
+                  
+                    <Field
+                      label=" First Name:"
+                      className='inputs'
+                      name="firstName"
+                      component={renderField}
+                      placeholder="Add Your Given Name..."
+                      type="text"
+                      {...firstName}
+                    />
+                    {/* {errors.firstName ? <Feedback error={errors.firstName} /> : ''} */}
+                    <Field
+                      className='inputs'
+                      label="Last Name:"
+                      placeholder="Add Your Family Name..."
+                      name="lastName"
+                      component={renderField}
+                      type="text"
+                      {...lastName}
+                    />
+                    {/* {errors.lastName ? <Feedback error={errors.lastName} /> : ''} */}
+                  
+                    <Field
+                      className='inputs'
+                      label="Phone Number:"
+                      placeholder="Add Phone Number..."
+                      name="phoneNumber"
+                      component={renderField}
+                      type="text"
+                      {...phoneNumber}
+                    />
+                    {/* {errors.phoneNumber ? <Feedback error={errors.phoneNumber} /> : ''} */}
+                    <Field
+                        className="checkbox"
+                        label="Gender:"
+                        type="radio"
+                        name = "gender"
+                        component={renderField}
+                        value="female"
+                        {...gender}
                     />Female
-                    <br />
-                    <input 
-                      className="checkbox"
-                      type="radio"
-                      name="gender"
-                      value="Male"
-                      checked= {gender === 'Male'}
-                      onChange={this.handleChange} 
+                    <Field
+                        className="checkbox"
+                        type="radio"
+                        name="gender"
+                        component={renderField}
+                        value="male"
+                        {...gender}
                     />Male
-                  </div>
-                </div>
-              <button 
-                type="submit" 
-                className="btn" 
-                disabled={(firstName.length>=3 && lastName.length>=3 && phoneNumber.length>6)? false : true}>
-                Save
-              </button>
-          </form>
+                <button 
+                  type="submit" 
+                  className="btn" 
+                >
+                  Save
+                </button>
+            </form>
         </div>
       );
   }
-}
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addMember: member => dispatch(addMember(member))
-    };
-};
-
-const Form = connect(null, mapDispatchToProps)(ConnectedForm);
-
-export default Form;
+export default reduxForm({
+  form: 'member-form',
+  fields: ["firstName", "lastName", "phoneNumber", "gender"],
+  validate,
+})(MemberForm)

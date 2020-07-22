@@ -1,54 +1,40 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { searchMembers } from "../actions/actions";
+import React from 'react';
 
+const SearchBar = ({ searchWord, searchMembers, getList, members }) => {
 
-class SearchBar extends Component {
-    constructor () {
-        super();
-        this.state = {
-            searchWord: ""
-        };
-
-        this.onClick = this.onClick.bind(this);
-    }
-
-    onClick(e){
-        e.preventDefault();
-        this.props.searchMembers(this.state.searchWord);
-        this.setState({searchWord:""});
+    // onClick(e){
+    //     e.preventDefault();
+    //     this.props.searchMembers(this.state.searchWord);
+    //     this.setState({searchWord:""});
         
-    }
+    // }
 
-    render() {
-        return (
-          <div className='container'>
-            <div className='card-title'>
-              <h4>Search Members</h4>
-            </div>
-            <form>
-                <div>
-                    <input type="text"
-                        className="inputs"
-                        placeholder="Search By Name..."      
-                        onChange={e => this.props.searchMembers(e.target.value)} />
-                </div>
-                <button
-                  onClick={this.onClick}>Full List
-                </button>    
-            </form>
-          </div>
-        )
-    }
+  return (
+    <div className='container'>
+      <div className='card-title'>
+        <h4>Search Members</h4>
+      </div>
+      <form>
+        <div>
+          <input type="text"
+            className="inputs"
+            placeholder="Search By Name..."      
+            onChange={e => searchMembers(e.target.value)} />
+        </div>
+        <button
+          onClick={getList(members)}>Full List
+        </button>    
+      </form>
+    </div>
+  )
 }
 
-const mapStateToProps= state => {
-    return { searchWord: state.searchWord }
-}
+// const mapStateToProps= state => {
+//     return { searchWord: state.searchWord }
+// }
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators({searchMembers: searchMembers}, dispatch);
-};
+// const mapDispatchToProps = dispatch => {
+//     return bindActionCreators({searchMembers: searchMembers}, dispatch);
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default SearchBar

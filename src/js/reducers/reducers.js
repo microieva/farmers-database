@@ -1,7 +1,11 @@
+import {reducer as formReducer} from 'redux-form';
+import { combineReducers } from 'redux'
+
 import { 
   ADD_MEMBER,
   GET_MEMBER,
-  SEARCH_MEMBERS 
+  SEARCH_MEMBERS,
+  GET_LIST 
 } from "../constants/action-types";
 
 const initialState = {
@@ -21,6 +25,9 @@ const reducers = (state = initialState, action) => {
         
         case SEARCH_MEMBERS: 
             return {...state, searchWord: action.payload };
+
+        case GET_LIST:
+          return {...state, members:[action.payload]};
         
         default:
             return state;
@@ -28,5 +35,10 @@ const reducers = (state = initialState, action) => {
 
 };
 
-export default reducers;
+export default combineReducers(
+  {
+    reducers: reducers,
+    form: formReducer
+  }
+);
 

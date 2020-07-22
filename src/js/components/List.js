@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
 
 const List = ({ members, searchWord, getMember }) => {
   return (
@@ -27,21 +25,4 @@ const List = ({ members, searchWord, getMember }) => {
   )
 };
 
-
-const matchDispatchToProps = dispatch => {
-  return bindActionCreators(
-    { 
-      selectMember: selectMember
-    }, 
-    dispatch
-  )
-};
-
-const mapStateToProps = state => {
-  return { 
-    members: state.members, 
-    searchWord: state.searchWord 
-  }
-};
-
-export default connect(mapStateToProps, matchDispatchToProps)(List);
+export default List
