@@ -1,6 +1,6 @@
 import { 
   ADD_MEMBER,
-  SELECT_MEMBER,
+  GET_MEMBER,
   SEARCH_MEMBERS 
 } from "../constants/action-types";
 
@@ -11,9 +11,9 @@ export const addMember = (member) => {
     }
 };
 
-export const selectMember = (member) => {
+export const getMember = (member) => {
     return {
-        type: SELECT_MEMBER,
+        type: GET_MEMBER,
         payload: member
     }
 };

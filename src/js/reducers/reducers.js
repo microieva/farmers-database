@@ -1,6 +1,6 @@
 import { 
   ADD_MEMBER,
-  SELECT_MEMBER,
+  GET_MEMBER,
   SEARCH_MEMBERS 
 } from "../constants/action-types";
 
@@ -16,7 +16,7 @@ const reducers = (state = initialState, action) => {
         case ADD_MEMBER:
             return { ...state, members: [...state.members, action.payload] };
 
-        case SELECT_MEMBER: 
+        case GET_MEMBER: 
             return { ...state, selectedMember: action.payload };
         
         case SEARCH_MEMBERS: 

@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { selectMember } from "../actions/actions";
 
-const ConnectedList = ({ members, searchWord, selectMember }) => {
+const List = ({ members, searchWord, getMember }) => {
   return (
     <div className='container'>
       <div className='card-title'>
           <h4>Members List</h4>
-          {members.length>0 && <h4>Number of Members: {members.length}</h4>}
+          <h4>Number of Members: {members.length}</h4>
       </div>
       <ul>
         {members
@@ -19,7 +18,7 @@ const ConnectedList = ({ members, searchWord, selectMember }) => {
           )
           .map(member => (
             <li key={member.id}
-              onClick={()=> selectMember(member)}>
+              onClick={()=> getMember(member)}>
               {`${member.firstName.charAt(0).toUpperCase()}${member.firstName.slice(1)} ${member.lastName.charAt(0).toUpperCase()}${member.lastName.slice(1)}`}
             </li>
         ))}
@@ -45,6 +44,4 @@ const mapStateToProps = state => {
   }
 };
 
-const List = connect(mapStateToProps, matchDispatchToProps)(ConnectedList);
-
-export default List;
+export default connect(mapStateToProps, matchDispatchToProps)(List);
