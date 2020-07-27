@@ -1,25 +1,19 @@
 import { 
   ADD_MEMBER,
   GET_MEMBER,
-  SEARCH_MEMBERS,
+  SEARCH_LIST,
   GET_LIST 
 } from "../constants/action-types";
-
-// export const addMember = (member) => { 
-//     return {
-//         type: ADD_MEMBER, 
-//         payload: member 
-//     }
-// };
 
 export const addMember = () => {
   return (dispatch, getState) => {
     const form = getState().form;
+    console.log("form:", form)
     const member = {
-      firstName: form.member.firstName.value,
-      lastName: form.member.lastName.value,
-      phoneNumber: form.member.phoneNumber.value,
-      gender: form.member.gender.value
+      firstName: form.member.values.firstName,
+      lastName: form.member.values.lastName,
+      phoneNumber: form.member.values.phoneNumber,
+      gender: form.member.values.gender
     };
     dispatch({
       type: ADD_MEMBER,
@@ -35,9 +29,9 @@ export const getMember = (member) => {
     }
 };
 
-export const searchMembers = (searchWord ="") => {
+export const searchList = (searchWord ="") => {
     return {
-        type: SEARCH_MEMBERS,
+        type: SEARCH_LIST,
         payload: searchWord
     }
 }

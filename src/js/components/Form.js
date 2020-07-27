@@ -1,4 +1,5 @@
 import React from "react";
+//import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form'
 //import uuidv1 from "uuid";
 
@@ -23,22 +24,23 @@ const renderField = (
   </div>
 )
 
-const  validate = ({addMember, firstName="", lastName="", phoneNumber="", gender="" }) =>{
-  let error ={}; 
+const  validate = ({firstName="", lastName="", phoneNumber="", gender="" }) =>{
+  let errors ={}; 
   //const button = document.querySelector('.btn')
 
   if (firstName.trim()==="" || firstName.length < 3 || firstName.length > 13) {
-    error.firstName = "Required field. From 2 to 12 letters long."
+    errors.firstName = "Required field. From 2 to 12 letters long."
   }
 
   else if (lastName.trim()==="" || lastName.length < 3 || lastName.length > 16) {
-    error.lastName = "Required field. From 2 to 15 letters long."
+    errors.lastName = "Required field. From 2 to 15 letters long."
   }
 
   else if (phoneNumber.trim()==="" || phoneNumber.length < 6 ) {
-    error.phoneNumber = "Required field. No less than 6 characters long."
+    errors.phoneNumber = "Required field. No less than 6 characters long."
   }
-
+  console.log("VALUES: ", firstName, lastName, phoneNumber, gender)
+  return errors
   //else {
     //submit form
     //to localSt
@@ -50,7 +52,6 @@ const  validate = ({addMember, firstName="", lastName="", phoneNumber="", gender
     //   button.textContent="Save"
     // }, 2000)
   //}     
-    console.log("VALUES: ", firstName, lastName, phoneNumber, gender)
 }   
 
 const MemberForm = (
@@ -103,7 +104,7 @@ const MemberForm = (
                 type="radio"
                 name = "gender"
                 component={renderField}
-                value="female"
+                value="Female"
                 {...gender}
               />Female
               <Field
@@ -111,7 +112,7 @@ const MemberForm = (
                 type="radio"
                 name="gender"
                 component={renderField}
-                value="male"
+                value="Male"
                 {...gender}
               />Male
               <button 
@@ -126,7 +127,7 @@ const MemberForm = (
   }
 
 export default reduxForm({
-  form: 'member-form',
+  form: 'member',
   fields: ["firstName", "lastName", "phoneNumber", "gender"],
   validate,
 })(MemberForm)

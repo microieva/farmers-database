@@ -21,9 +21,9 @@ const SearchBar = ({ searchWord, searchMembers, getList, members }) => {
             placeholder="Search By Name..."      
             onChange={e => searchMembers(e.target.value)} />
         </div>
-        {/* <button
+        <button
           onClick={getList(members)}>Full List
-        </button>     */}
+        </button> 
       </form>
     </div>
   )

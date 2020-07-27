@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addMember, getMember, searchMembers, getList } from "../actions/actions"
+import { addMember, getMember, searchList, getList } from "../actions/actions"
 import List from "./List";
 import Form from "./Form";
 import Member from "./Member";
@@ -13,7 +13,7 @@ class App extends Component {
       addMember,
       getMember,
       getList,
-      searchMembers,
+      searchList,
       members,
       selectedMember,
       searchWord
@@ -29,7 +29,12 @@ class App extends Component {
       </div>
       <div className="flex-top">
         <Form addMember={addMember}/>
-        {members && members.length>0 ?
+        <List 
+            getMember={getMember}
+            members={members}
+            searchWord={searchWord}
+          />
+        {/* {members && members.length ?
           <List 
             getMember={getMember}
             members={members}
@@ -38,18 +43,18 @@ class App extends Component {
           :
           <div className='container'>
             <div className='card-title'>
-              <h4>Members List</h4>
+            <h4>Members List</h4>
             </div>
           </div>
-        }
+        } */}
         
       </div>
       <div className="flex-bottom">
         <SearchBar 
-          searchMembers={searchMembers}
+          searchList={searchList}
           searchWord={searchWord}
           members={members}
-          onClick={getList}
+          getList={getList}
         />
         {!selectedMember ? 
           <div className='container'>
@@ -67,11 +72,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  //console.log('state from mapStateToProps', state)
-
   return {
-      selectedMember: state.selectedMember,
-      members: state.members,
+      selectedMember: state.main.selectedMember,
+      members: state.main.members,
       searchWord: state.searchWord,
 
   }
@@ -82,7 +85,7 @@ const matchDispatchToProps = dispatch => {
     { 
       getMember: getMember,
       addMember: addMember,
-      searchMembers: searchMembers,
+      searchList: searchList,
       getList: getList
     }, 
     dispatch

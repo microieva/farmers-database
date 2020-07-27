@@ -93,12 +93,18 @@ button {
 }
 
 ul {
-  margin: 2rem 0;
+  list-style-type: none;
+  padding: 1rem 0;
 }
 
 li {
-  margin: 1rem 0;
+  padding: 1rem 1rem;
+}
+
+li:hover {
   cursor: pointer;
+  background: lightgray;
+  border-radius: 5px;
 }
 
 /* EXAMPLE  .grid_item {

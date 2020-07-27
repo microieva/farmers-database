@@ -4,7 +4,7 @@ import { combineReducers } from 'redux'
 import { 
   ADD_MEMBER,
   GET_MEMBER,
-  SEARCH_MEMBERS,
+  SEARCH_LIST,
   GET_LIST 
 } from "../constants/action-types";
 
@@ -16,28 +16,29 @@ const initialState = {
 };
 
 const reducers = (state = initialState, action) => {
+  console.log("state", state)
     switch (action.type) {
         case ADD_MEMBER:
-            return { ...state, members: [...state.members, action.payload] };
+            return { ...state, members: [...state.members, action.payload]};
 
         case GET_MEMBER: 
             return { ...state, selectedMember: action.payload };
         
-        case SEARCH_MEMBERS: 
+        case SEARCH_LIST: 
             return {...state, searchWord: action.payload };
 
         case GET_LIST:
           return { members: action.payload };
         
         default:
-            return state;
+          return state;
     }
 
 };
 
 export default combineReducers(
   {
-    reducers: reducers,
+    main: reducers,
     form: formReducer
   }
 );
