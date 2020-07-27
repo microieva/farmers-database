@@ -21,20 +21,12 @@ const SearchBar = ({ searchWord, searchMembers, getList, members }) => {
             placeholder="Search By Name..."      
             onChange={e => searchMembers(e.target.value)} />
         </div>
-        <button
+        {/* <button
           onClick={getList(members)}>Full List
-        </button>    
+        </button>     */}
       </form>
     </div>
   )
 }
-
-// const mapStateToProps= state => {
-//     return { searchWord: state.searchWord }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//     return bindActionCreators({searchMembers: searchMembers}, dispatch);
-// };
 
 export default SearchBar

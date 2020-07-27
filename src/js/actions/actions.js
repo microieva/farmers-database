@@ -12,7 +12,7 @@ import {
 //     }
 // };
 
-export function addMember() {
+export const addMember = () => {
   return (dispatch, getState) => {
     const form = getState().form;
     const member = {

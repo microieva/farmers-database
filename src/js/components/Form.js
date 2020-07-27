@@ -23,7 +23,7 @@ const renderField = (
   </div>
 )
 
-const  validate = ({firstName="", lastName="", phoneNumber="", gender="" }) =>{
+const  validate = ({addMember, firstName="", lastName="", phoneNumber="", gender="" }) =>{
   let error ={}; 
   //const button = document.querySelector('.btn')
 
@@ -39,18 +39,18 @@ const  validate = ({firstName="", lastName="", phoneNumber="", gender="" }) =>{
     error.phoneNumber = "Required field. No less than 6 characters long."
   }
 
-  else {
+  //else {
     //submit form
     //to localSt
-    this.props.addMember({firstName, lastName, phoneNumber, gender})
+    //addMember({firstName, lastName, phoneNumber, gender})
       
 
     // button.textContent = "Saved!"
     // setInterval(() => {    
     //   button.textContent="Save"
     // }, 2000)
-  }     
-    console.log("VALUES: ", firstName, lastName, phoneNumber)
+  //}     
+    console.log("VALUES: ", firstName, lastName, phoneNumber, gender)
 }   
 
 const MemberForm = (
@@ -67,61 +67,59 @@ const MemberForm = (
             <h4>Membership Form</h4>
           </div>
             <form onSubmit={handleSubmit(addMember)}>
-                  
-                    <Field
-                      label=" First Name:"
-                      className='inputs'
-                      name="firstName"
-                      component={renderField}
-                      placeholder="Add Your Given Name..."
-                      type="text"
-                      {...firstName}
-                    />
-                    {/* {errors.firstName ? <Feedback error={errors.firstName} /> : ''} */}
-                    <Field
-                      className='inputs'
-                      label="Last Name:"
-                      placeholder="Add Your Family Name..."
-                      name="lastName"
-                      component={renderField}
-                      type="text"
-                      {...lastName}
-                    />
-                    {/* {errors.lastName ? <Feedback error={errors.lastName} /> : ''} */}
-                  
-                    <Field
-                      className='inputs'
-                      label="Phone Number:"
-                      placeholder="Add Phone Number..."
-                      name="phoneNumber"
-                      component={renderField}
-                      type="text"
-                      {...phoneNumber}
-                    />
-                    {/* {errors.phoneNumber ? <Feedback error={errors.phoneNumber} /> : ''} */}
-                    <Field
-                        className="checkbox"
-                        label="Gender:"
-                        type="radio"
-                        name = "gender"
-                        component={renderField}
-                        value="female"
-                        {...gender}
-                    />Female
-                    <Field
-                        className="checkbox"
-                        type="radio"
-                        name="gender"
-                        component={renderField}
-                        value="male"
-                        {...gender}
-                    />Male
-                <button 
-                  type="submit" 
-                  className="btn" 
-                >
-                  Save
-                </button>
+              <Field
+                label=" First Name:"
+                className='inputs'
+                name="firstName"
+                component={renderField}
+                placeholder="Add Your Given Name..."
+                type="text"
+                {...firstName}
+              />
+              {/* {errors.firstName ? <Feedback error={errors.firstName} /> : ''} */}
+              <Field
+                className='inputs'
+                label="Last Name:"
+                placeholder="Add Your Family Name..."
+                name="lastName"
+                component={renderField}
+                type="text"
+                {...lastName}
+              />
+              {/* {errors.lastName ? <Feedback error={errors.lastName} /> : ''} */}   
+              <Field
+                className='inputs'
+                label="Phone Number:"
+                placeholder="Add Phone Number..."
+                name="phoneNumber"
+                component={renderField}
+                type="text"
+                {...phoneNumber}
+              />
+              {/* {errors.phoneNumber ? <Feedback error={errors.phoneNumber} /> : ''} */}
+              <Field
+                className="checkbox"
+                label="Gender:"
+                type="radio"
+                name = "gender"
+                component={renderField}
+                value="female"
+                {...gender}
+              />Female
+              <Field
+                className="checkbox"
+                type="radio"
+                name="gender"
+                component={renderField}
+                value="male"
+                {...gender}
+              />Male
+              <button 
+                type="submit" 
+                className="btn" 
+              >
+                Save
+              </button>
             </form>
         </div>
       );

@@ -29,7 +29,7 @@ class App extends Component {
       </div>
       <div className="flex-top">
         <Form addMember={addMember}/>
-        {members.length>0 ?
+        {members && members.length>0 ?
           <List 
             getMember={getMember}
             members={members}
@@ -49,7 +49,7 @@ class App extends Component {
           searchMembers={searchMembers}
           searchWord={searchWord}
           members={members}
-          getList={getList}
+          onClick={getList}
         />
         {!selectedMember ? 
           <div className='container'>

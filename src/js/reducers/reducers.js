@@ -27,7 +27,7 @@ const reducers = (state = initialState, action) => {
             return {...state, searchWord: action.payload };
 
         case GET_LIST:
-          return {...state, members:[action.payload]};
+          return { members: action.payload };
         
         default:
             return state;
