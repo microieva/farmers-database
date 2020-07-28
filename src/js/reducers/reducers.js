@@ -5,7 +5,7 @@ import {
   ADD_MEMBER,
   GET_MEMBER,
   SEARCH_LIST,
-  GET_LIST 
+  GET_LIST,
 } from "../constants/action-types";
 
 const initialState = {
@@ -16,7 +16,7 @@ const initialState = {
 };
 
 const reducers = (state = initialState, action) => {
-  console.log("state", state)
+  console.log("state from reducers", state)
     switch (action.type) {
         case ADD_MEMBER:
             return { ...state, members: [...state.members, action.payload]};
@@ -26,14 +26,13 @@ const reducers = (state = initialState, action) => {
         
         case SEARCH_LIST: 
             return {...state, searchWord: action.payload };
-
+        
         case GET_LIST:
-          return { members: action.payload };
+          return { members: action.payload } 
         
         default:
           return state;
     }
-
 };
 
 export default combineReducers(

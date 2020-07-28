@@ -1,5 +1,4 @@
 import React from "react";
-//import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form'
 //import uuidv1 from "uuid";
 
@@ -39,20 +38,15 @@ const  validate = ({firstName="", lastName="", phoneNumber="", gender="" }) =>{
   else if (phoneNumber.trim()==="" || phoneNumber.length < 6 ) {
     errors.phoneNumber = "Required field. No less than 6 characters long."
   }
-  console.log("VALUES: ", firstName, lastName, phoneNumber, gender)
-  return errors
-  //else {
-    //submit form
     //to localSt
-    //addMember({firstName, lastName, phoneNumber, gender})
       
 
     // button.textContent = "Saved!"
     // setInterval(() => {    
     //   button.textContent="Save"
-    // }, 2000)
-  //}     
-}   
+    // }, 2000) 
+  return errors    
+}  
 
 const MemberForm = (
   {
@@ -77,7 +71,6 @@ const MemberForm = (
                 type="text"
                 {...firstName}
               />
-              {/* {errors.firstName ? <Feedback error={errors.firstName} /> : ''} */}
               <Field
                 className='inputs'
                 label="Last Name:"
@@ -87,7 +80,6 @@ const MemberForm = (
                 type="text"
                 {...lastName}
               />
-              {/* {errors.lastName ? <Feedback error={errors.lastName} /> : ''} */}   
               <Field
                 className='inputs'
                 label="Phone Number:"
@@ -97,24 +89,23 @@ const MemberForm = (
                 type="text"
                 {...phoneNumber}
               />
-              {/* {errors.phoneNumber ? <Feedback error={errors.phoneNumber} /> : ''} */}
-              <Field
-                className="checkbox"
-                label="Gender:"
-                type="radio"
-                name = "gender"
-                component={renderField}
-                value="Female"
-                {...gender}
-              />Female
-              <Field
-                className="checkbox"
-                type="radio"
-                name="gender"
-                component={renderField}
-                value="Male"
-                {...gender}
-              />Male
+              <label>Gender:</label>
+              <div>
+                <label style={{fontWeight: 'normal'}}><Field
+                  className="checkbox"
+                  type="radio"
+                  name = "gender"
+                  component='input'
+                  value="Female"
+                  {...gender}/>Female</label>
+                <label style={{fontWeight: 'normal'}}><Field
+                  className="checkbox"
+                  type="radio"
+                  name="gender"
+                  component='input'
+                  value="Male"
+                  {...gender}/>Male</label>
+              </div>
               <button 
                 type="submit" 
                 className="btn" 

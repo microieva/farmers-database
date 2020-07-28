@@ -60,7 +60,8 @@ form>div {
 
 label {
   font-size: 1rem;
-  font-weight: 900;
+  color: #4B4747;
+  font-weight: 800;
   margin-bottom: 0.5rem;
 }
 
@@ -75,6 +76,21 @@ label {
 
 .member-details {
   padding: 1rem;
+  color: #4B4747;
+}
+
+.member-details:h4{
+  font-weight: 800;
+}
+
+.member-details>div{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-bottom: 2px solid lightgray;
+  height: 2rem;
+  margin: 1rem 0;
 }
 
 button {
@@ -94,17 +110,29 @@ button {
 
 ul {
   list-style-type: none;
-  padding: 1rem 0;
+  padding: 1rem 1rem;
 }
 
 li {
   padding: 1rem 1rem;
+  color: #4B4747;
+  font-weight: 800;
+  border-bottom: 2px solid lightgray;
+  margin-bottom: 0.5rem;
 }
 
 li:hover {
   cursor: pointer;
   background: lightgray;
   border-radius: 5px;
+  color: white;
+  font-weight: 800;
+}
+
+.error {
+  margin-top: 0.5rem;
+  color: orange;
+  font-size: 0.8rem;
 }
 
 /* EXAMPLE  .grid_item {

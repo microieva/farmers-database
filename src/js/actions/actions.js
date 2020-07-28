@@ -1,9 +1,12 @@
+import { reset } from 'redux-form';
+
 import { 
   ADD_MEMBER,
   GET_MEMBER,
   SEARCH_LIST,
-  GET_LIST 
+  GET_LIST,
 } from "../constants/action-types";
+
 
 export const addMember = () => {
   return (dispatch, getState) => {
@@ -19,6 +22,7 @@ export const addMember = () => {
       type: ADD_MEMBER,
       payload: member,
     });
+    dispatch(reset('member'))
   }
 }
 
@@ -29,11 +33,13 @@ export const getMember = (member) => {
     }
 };
 
-export const searchList = (searchWord ="") => {
-    return {
-        type: SEARCH_LIST,
-        payload: searchWord
-    }
+export const searchList = (searchWord) => {
+  return (dispatch) => {
+    dispatch({
+      type: SEARCH_LIST,
+      payload: searchWord
+    })
+  }
 }
 
 export const getList = (members) => {
