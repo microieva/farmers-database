@@ -12,11 +12,9 @@ const initialState = {
     members: [],
     searchWord: '',
     selectedMember: null,
-    filteredMembers: []
 };
 
 const reducers = (state = initialState, action) => {
-  console.log("state from reducers", state)
     switch (action.type) {
         case ADD_MEMBER:
             return { ...state, members: [...state.members, action.payload]};
@@ -24,8 +22,13 @@ const reducers = (state = initialState, action) => {
         case GET_MEMBER: 
             return { ...state, selectedMember: action.payload };
         
-        case SEARCH_LIST: 
-            return {...state, searchWord: action.payload };
+        case SEARCH_LIST:
+          const searchWord = action.payload;
+          console.log(searchWord)
+          return {
+            ...state, 
+            searchWord
+          };
         
         case GET_LIST:
           return { members: action.payload } 

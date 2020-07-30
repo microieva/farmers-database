@@ -11,7 +11,7 @@ import {
 export const addMember = () => {
   return (dispatch, getState) => {
     const form = getState().form;
-    console.log("form:", form)
+    console.log("form from addMember:", form)
     const member = {
       firstName: form.member.values.firstName,
       lastName: form.member.values.lastName,
@@ -33,11 +33,11 @@ export const getMember = (member) => {
     }
 };
 
-export const searchList = (searchWord) => {
+export const searchList = (searchTerm) => {
   return (dispatch) => {
     dispatch({
       type: SEARCH_LIST,
-      payload: searchWord
+      payload: searchTerm
     })
   }
 }

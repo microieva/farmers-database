@@ -23,9 +23,8 @@ const renderField = (
   </div>
 )
 
-const  validate = ({firstName="", lastName="", phoneNumber="", gender="" }) =>{
+const  validate = ({firstName="", lastName="", phoneNumber=""}) =>{
   let errors ={}; 
-  //const button = document.querySelector('.btn')
 
   if (firstName.trim()==="" || firstName.length < 3 || firstName.length > 13) {
     errors.firstName = "Required field. From 2 to 12 letters long."
@@ -38,13 +37,6 @@ const  validate = ({firstName="", lastName="", phoneNumber="", gender="" }) =>{
   else if (phoneNumber.trim()==="" || phoneNumber.length < 6 ) {
     errors.phoneNumber = "Required field. No less than 6 characters long."
   }
-    //to localSt
-      
-
-    // button.textContent = "Saved!"
-    // setInterval(() => {    
-    //   button.textContent="Save"
-    // }, 2000) 
   return errors    
 }  
 
@@ -52,7 +44,9 @@ const MemberForm = (
   {
     handleSubmit, 
     fields: {firstName, lastName, phoneNumber, gender}, 
-    addMember
+    addMember,
+    pristine,
+    submitting
   }
 ) => {
       
@@ -89,26 +83,31 @@ const MemberForm = (
                 type="text"
                 {...phoneNumber}
               />
-              <label>Gender:</label>
-              <div>
-                <label style={{fontWeight: 'normal'}}><Field
-                  className="checkbox"
-                  type="radio"
-                  name = "gender"
-                  component='input'
-                  value="Female"
-                  {...gender}/>Female</label>
-                <label style={{fontWeight: 'normal'}}><Field
-                  className="checkbox"
-                  type="radio"
-                  name="gender"
-                  component='input'
-                  value="Male"
-                  {...gender}/>Male</label>
+              <label style={{paddingTop: '1rem'}}>Gender:</label>
+              <div style={{padding: 0}}>
+                <label style={{fontWeight: 'normal'}}>
+                  <Field
+                    className="checkbox"
+                    type="radio"
+                    name = "gender"
+                    component='input'
+                    value="Female"
+                    {...gender}/>{" "}Female
+                </label>
+                <label style={{fontWeight: 'normal'}}>
+                  <Field
+                    className="checkbox"
+                    type="radio"
+                    name="gender"
+                    component='input'
+                    value="Male"
+                  {...gender}/>{" "}Male
+                </label>
               </div>
               <button 
                 type="submit" 
                 className="btn" 
+                disabled={pristine || submitting}
               >
                 Save
               </button>

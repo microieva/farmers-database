@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addMember, getMember } from "../actions/actions"
+import { addMember, getMember, searchList, getList } from "../actions/actions"
 import List from "./List";
 import Form from "./Form";
 import Member from "./Member";
@@ -14,7 +14,9 @@ class App extends Component {
       getMember,
       members,
       selectedMember,
-      searchWord
+      searchWord,
+      searchList,
+      getList
 
     } = this.props
 
@@ -28,14 +30,16 @@ class App extends Component {
       <div className="flex-top">
         <Form addMember={addMember}/>
         <List 
-            getMember={getMember}
-            members={members}
-            searchWord={searchWord}
+          getMember={getMember}
+          members={members}
+          searchWord={searchWord}
           />
       </div>
       <div className="flex-bottom">
         <SearchBar 
           searchWord={searchWord}
+          searchList={searchList}
+          getList={getList}
           members={members}
         />
         {!selectedMember ? 
@@ -57,8 +61,7 @@ const mapStateToProps = state => {
   return {
       selectedMember: state.main.selectedMember,
       members: state.main.members,
-      searchWord: state.searchWord,
-
+      searchWord: state.main.searchWord,
   }
 }
 
@@ -67,6 +70,8 @@ const matchDispatchToProps = dispatch => {
     { 
       getMember: getMember,
       addMember: addMember,
+      searchList: searchList,
+      getList: getList
     }, 
     dispatch
   )

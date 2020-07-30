@@ -1,44 +1,38 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types'
 
-import { searchList } from '../actions/actions'
-
-class SearchBar extends Component {
-  onChange = e => {
-    e.preventDefault();
-    this.props.searchList(e.target.value)
-  }
-  onClick = e => {
-    e.preventDefault();
-    this.props.searchList(this.state.searchWord);
-    this.setState({searchWord:""});      
-  }
-  render () {
-    return (
-      <div className='container'>
-        <div className='card-title'>
-          <h4>Search Members</h4>
-        </div>
-        <form>
-          <div>
-            <input type="text"
-              className="inputs"
-              placeholder="Search By Name..." 
-              name="searchWord"   
-              onChange={this.onChange} />
+const SearchBar = ({ searchWord, searchList }) => {
+  return (
+    <div className='container'>
+      <div className='card-title'>
+        <h4>Search Members</h4>
+      </div>
+      <form >
+        <div>
+          <input
+            type="text"
+            className="inputs"
+            placeholder="Search By Name..." 
+            name="searchWord"  
+            value={searchWord}
+            onChange={e => {searchList(e.target.value)}} 
+            />
           </div>
           <button
-            onClick={this.onClick}>Full List
+            onClick={(e)=> {
+              e.preventDefault()
+              searchList("")
+            }}
+            >Full List
           </button> 
         </form>
       </div>
-    )
-  }
+  )
 }
 
-const mapStateToProps = state => ({
-  searchWord: state.searchWord
-});
+SearchBar.propTypes = {
+  searchWord: PropTypes.string,
+  searchList: PropTypes.func.isRequired
+}
 
-export default connect(mapStateToProps, { searchList })(SearchBar);
-
+export default SearchBar

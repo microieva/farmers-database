@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-const List = ({ members, searchWord="", getMember }) => {
+const List = ({ members, searchWord, getMember }) => {
   console.log("members inside List.js:", members)
   return (
     <div className='container'>
@@ -10,12 +10,12 @@ const List = ({ members, searchWord="", getMember }) => {
           {members.length>0 && <h4>Number of Members: {members.length}</h4>}
       </div>
       <ul>
-        {members
-          .filter(member => 
-            member.firstName.toLowerCase().indexOf(searchWord.toLowerCase()) >=0
-            ||
-            member.lastName.toLowerCase().indexOf(searchWord.toLowerCase()) >=0
-          )
+        {(members)
+           .filter(member => 
+             member.firstName.toLowerCase().indexOf(searchWord.toLowerCase()) >=0
+             ||
+             member.lastName.toLowerCase().indexOf(searchWord.toLowerCase()) >=0
+           )
           .map(member => (
             <li 
               onClick={()=> getMember(member)}>
