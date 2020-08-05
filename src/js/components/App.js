@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addMember, getMember, searchList, getList } from "../actions/actions"
+import { 
+  addMember, 
+  getMember, 
+  searchList, 
+  getList, 
+  deleteMember 
+} from "../actions";
+
 import List from "./List";
 import Form from "./Form";
 import Member from "./Member";
@@ -16,8 +23,8 @@ class App extends Component {
       selectedMember,
       searchWord,
       searchList,
-      getList
-
+      getList,
+      deleteMember
     } = this.props
 
     return (
@@ -49,7 +56,10 @@ class App extends Component {
             </div>
           </div>
           :
-          <Member selectedMember={selectedMember}/>
+          <Member 
+            selectedMember={selectedMember}
+            deleteMember={deleteMember}
+          />
         }  
       </div>
     </div>
@@ -71,7 +81,8 @@ const matchDispatchToProps = dispatch => {
       getMember: getMember,
       addMember: addMember,
       searchList: searchList,
-      getList: getList
+      getList: getList,
+      deleteMember: deleteMember
     }, 
     dispatch
   )

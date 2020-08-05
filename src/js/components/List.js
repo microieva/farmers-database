@@ -17,7 +17,7 @@ const List = ({ members, searchWord, getMember }) => {
              member.lastName.toLowerCase().indexOf(searchWord.toLowerCase()) >=0
            )
           .map(member => (
-            <li 
+            <li key={member.id}
               onClick={()=> getMember(member)}>
               {`${member.firstName.charAt(0).toUpperCase()}${member.firstName.slice(1)} ${member.lastName.charAt(0).toUpperCase()}${member.lastName.slice(1)}`}
             </li>

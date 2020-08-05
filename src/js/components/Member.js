@@ -1,8 +1,9 @@
 import React from "react";
 
-const Member = ({ selectedMember }) => {
+const Member = ({ selectedMember, deleteMember }) => {
+  
   const { firstName, lastName, phoneNumber, gender } = selectedMember
-
+  console.log("selectedMember:", selectedMember)
   return (
     <div className='container'>
       <div className='card-title'>
@@ -18,6 +19,9 @@ const Member = ({ selectedMember }) => {
         <div>
           <h4>Gender:</h4><p>{gender}</p>
         </div>
+        <button onClick={() => deleteMember(selectedMember)}>
+          Delete
+        </button>
       </div>
     </div>
   );

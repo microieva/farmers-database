@@ -1,18 +1,22 @@
 import { reset } from 'redux-form';
+import { v4 as uuidv4 } from 'uuid'
 
 import { 
   ADD_MEMBER,
   GET_MEMBER,
   SEARCH_LIST,
   GET_LIST,
+  DELETE_MEMBER
 } from "../constants/action-types";
 
 
 export const addMember = () => {
   return (dispatch, getState) => {
     const form = getState().form;
+    const id = uuidv4()
     console.log("form from addMember:", form)
     const member = {
+      id: id,
       firstName: form.member.values.firstName,
       lastName: form.member.values.lastName,
       phoneNumber: form.member.values.phoneNumber,
@@ -33,6 +37,15 @@ export const getMember = (member) => {
     }
 };
 
+export const deleteMember = (member) => {
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_MEMBER,
+      payload: member
+    })  
+  }
+}
+
 export const searchList = (searchTerm) => {
   return (dispatch) => {
     dispatch({
@@ -49,14 +62,3 @@ export const getList = (members) => {
   }
 }
 
-///(input)  ????? (input={} ???????)
-export const updateInput = (input) => {
-  return {
-    type: UPDATE_INPUT,
-    payload: {
-      firstName: input.firstName,
-      lastName: input.lastName,
-      phoneNumber: input.phoneNumber,
-    }
-  }
-}
