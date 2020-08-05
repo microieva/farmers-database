@@ -1,7 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 
-const List = ({ members=[], searchWord, getMember }) => {
+const List = ({ members, searchWord, getMember }) => {
+  console.log("members inside List.js:", members)
   return (
     <div className='container'>
       <div className='card-title'>
@@ -9,14 +10,14 @@ const List = ({ members=[], searchWord, getMember }) => {
           {members.length>0 && <h4>Number of Members: {members.length}</h4>}
       </div>
       <ul>
-        {members
-          .filter(member => 
-            member.firstName.toLowerCase().indexOf(searchWord.toLowerCase()) >=0
-            ||
-            member.lastName.toLowerCase().indexOf(searchWord.toLowerCase()) >=0
-          )
+        {(members)
+           .filter(member => 
+             member.firstName.toLowerCase().indexOf(searchWord.toLowerCase()) >=0
+             ||
+             member.lastName.toLowerCase().indexOf(searchWord.toLowerCase()) >=0
+           )
           .map(member => (
-            <li key={member.id}
+            <li 
               onClick={()=> getMember(member)}>
               {`${member.firstName.charAt(0).toUpperCase()}${member.firstName.slice(1)} ${member.lastName.charAt(0).toUpperCase()}${member.lastName.slice(1)}`}
             </li>
@@ -26,22 +27,17 @@ const List = ({ members=[], searchWord, getMember }) => {
   )
 };
 
-
-// const matchDispatchToProps = dispatch => {
-//   return bindActionCreators(
-//     { 
-//       getFarmer: this.props.getFarmer,
-//     }, 
-//     dispatch
-//   )
-// };
-
-const mapStateToProps = state => {
-  return { 
-    members: state.members, 
-    searchWord: state.searchWord 
-  }
+List.propTypes = {
+  members: PropTypes.arrayOf(
+    PropTypes.shape({
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      phoneNumber: PropTypes.string.isRequired,
+      gender: PropTypes.string
+    }).isRequired
+  ).isRequired,
+  searchWord: PropTypes.string,
+  getMember: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(List);
-
+export default List

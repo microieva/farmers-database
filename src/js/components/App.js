@@ -1,47 +1,48 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-import { getMember, addMember } from '../actions/actions';
+import { addMember, getMember, searchList, getList } from "../actions/actions"
 import List from "./List";
-import MemberForm from "./Form";
+import Form from "./Form";
 import Member from "./Member";
 import SearchBar from "./SearchBar";
 
-
 class App extends Component {
-  render() {
-    const { 
-      selectedMember, 
-      members, 
-      searchWord,
-      getMember,
+  render () {
+    const {
       addMember,
-    } = this.props
+      getMember,
+      members,
+      selectedMember,
+      searchWord,
+      searchList,
+      getList
 
-    //console.log("props from App.js", this.props)
+    } = this.props
 
     return (
       <div className="wrapper">
-        <div className="header">
-          <div>
-            <h2>Member Database</h2>
-          </div>
+      <div className="header">
+        <div>
+          <h2>Members Database</h2>
         </div>
-        <div className="flex-top">
-          <MemberForm 
-            addMember={addMember}
+      </div>
+      <div className="flex-top">
+        <Form addMember={addMember}/>
+        <List 
+          getMember={getMember}
+          members={members}
+          searchWord={searchWord}
           />
-          <List 
-            members={members} 
-            searchWord={searchWord} 
-            getMember={getMember}
-          /> 
-        </div>
-        <div className="flex-bottom">
-          <SearchBar searchWord={searchWord}/>
-          {!selectedMember
-          ?
+      </div>
+      <div className="flex-bottom">
+        <SearchBar 
+          searchWord={searchWord}
+          searchList={searchList}
+          getList={getList}
+          members={members}
+        />
+        {!selectedMember ? 
           <div className='container'>
             <div className='card-title'>
               <h4>Select A Member...</h4>
@@ -49,21 +50,18 @@ class App extends Component {
           </div>
           :
           <Member selectedMember={selectedMember}/>
-          }
-          
-        </div>
+        }  
       </div>
+    </div>
     )
-  } 
-};
+  }  
+}
 
 const mapStateToProps = state => {
-  //console.log('state from mapStateToProps', state)
-
   return {
-      members: state.members,
-      searchWord: state.searchWord,
-      selectedMember: state.selectedMember,
+      selectedMember: state.main.selectedMember,
+      members: state.main.members,
+      searchWord: state.main.searchWord,
   }
 }
 
@@ -71,10 +69,12 @@ const matchDispatchToProps = dispatch => {
   return bindActionCreators(
     { 
       getMember: getMember,
-      addMember: addMember
+      addMember: addMember,
+      searchList: searchList,
+      getList: getList
     }, 
     dispatch
   )
 };
-
+ 
 export default connect(mapStateToProps, matchDispatchToProps)(App)
