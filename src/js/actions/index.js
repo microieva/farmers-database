@@ -14,7 +14,6 @@ export const addMember = () => {
   return (dispatch, getState) => {
     const form = getState().form;
     const id = uuidv4()
-    console.log("form from addMember:", form)
     const member = {
       id: id,
       firstName: form.member.values.firstName,

@@ -32,7 +32,8 @@ const reducers = (state = initialState, action) => {
         case DELETE_MEMBER:
             return {
               ...state,
-              members: state.members.filter((member) => member.id !== action.payload.id),
+              members: state.members
+                .filter((member) => member.id !== action.payload.id),
               selectedMember: null,
             }
         

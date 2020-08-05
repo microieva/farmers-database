@@ -140,14 +140,3 @@ li:hover {
   font-size: 0.8rem;
 }
 
-/* EXAMPLE  .grid_item {
-  @include rowMachine(1, 10%);
-  display: inline-block;
-  background: none;
-  padding: 10px;
-  position: relative;
-
-  @media (min-width: 500px) {
-      @include rowMachine(2, 5%);
-      float: left;
-  } */
