@@ -25,7 +25,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://microieva.github.io/farmers-database",
+  "homepage": "https://members-database.herokuapp.com/",
   "eslintConfig": {
     "extends": "react-app"
   },
